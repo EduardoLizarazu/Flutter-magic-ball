@@ -32,19 +32,16 @@ class _inicioState extends State<inicio> {
   TextEditingController bodyController = TextEditingController();
   Future<String> getData() async {
     var response = await http.get(
-        Uri.parse("https://jsonplaceholder.typicode.com/posts"),
+        Uri.parse("https://apisuerte20220316210656.azurewebsites.net/fortunes"),
         headers: {"Accept": "aplication/json"});
-    List map = json.decode(response.body);
-    var basic = Basic.fromJson(map[1]);
-    print("id");
-    print(basic.id);
-    print("title");
-    print(basic.title);
-    print("body");
-    print(basic.body);
-    idController.text = 'id ' + basic.id.toString();
-    titleController.text = 'Titulo ' + basic.title.toString();
-    bodyController.text = 'body ' + basic.body.toString();
+    Map<String, dynamic> map2 = json.decode(response.body);
+    int luckyNumber = map2["luckyNumber"];
+    String luck = map2["luck"];
+    print(luckyNumber);
+    print(luck);
+    // idController.text = 'id ' + basic.id.toString();
+    // titleController.text = 'Titulo ' + basic.title.toString();
+    // bodyController.text = 'body ' + basic.body.toString();
     return 'okey';
   }
 
