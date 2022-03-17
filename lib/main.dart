@@ -27,21 +27,20 @@ class inicio extends StatefulWidget {
 }
 
 class _inicioState extends State<inicio> {
-  TextEditingController idController = TextEditingController();
-  TextEditingController titleController = TextEditingController();
-  TextEditingController bodyController = TextEditingController();
+  TextEditingController luckyNumberController = TextEditingController();
+  TextEditingController luckController = TextEditingController();
   Future<String> getData() async {
     var response = await http.get(
         Uri.parse("https://apisuerte20220316210656.azurewebsites.net/fortunes"),
         headers: {"Accept": "aplication/json"});
-    Map<String, dynamic> map2 = json.decode(response.body);
-    int luckyNumber = map2["luckyNumber"];
-    String luck = map2["luck"];
+    Map<String, dynamic> map = json.decode(response.body);
+    int luckyNumber = map["luckyNumber"];
+    String luck = map["luck"];
     print(luckyNumber);
     print(luck);
-    // idController.text = 'id ' + basic.id.toString();
-    // titleController.text = 'Titulo ' + basic.title.toString();
-    // bodyController.text = 'body ' + basic.body.toString();
+    luckyNumberController.text = 'Lucky Number: ' + luckyNumber.toString();
+    luckController.text = 'Luck: ' + luck.toString();
+    var obj = {luck, luckyNumber};
     return 'okey';
   }
 
@@ -71,22 +70,16 @@ class _inicioState extends State<inicio> {
         ElevatedButton(
             onPressed: getData, child: new Text('Llamando a servicio web')),
         TextFormField(
-          controller: idController,
+          controller: luckyNumberController,
           readOnly: true,
-          decoration:
-              InputDecoration(hintText: "ID: ", border: InputBorder.none),
+          decoration: InputDecoration(
+              hintText: "LuckyNumber: ", border: InputBorder.none),
         ),
         TextFormField(
-          controller: titleController,
+          controller: luckController,
           readOnly: true,
           decoration:
-              InputDecoration(hintText: "Title: ", border: InputBorder.none),
-        ),
-        TextFormField(
-          controller: bodyController,
-          readOnly: true,
-          decoration:
-              InputDecoration(hintText: "Body: ", border: InputBorder.none),
+              InputDecoration(hintText: "Luck: ", border: InputBorder.none),
         ),
       ]),
     );
