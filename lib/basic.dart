@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class Basic {
   int? userId;
   int? id;
@@ -20,5 +25,25 @@ class Basic {
     data['title'] = this.title;
     data['body'] = this.body;
     return data;
+  }
+}
+
+class getLuckyAPI {
+  int? luckyNumber;
+  String? lucky;
+
+  getLuckyAPI({this.luckyNumber, this.lucky});
+
+  Future<Object> getData() async {
+    var response = await http.get(
+        Uri.parse("https://apisuerte20220316210656.azurewebsites.net/fortunes"),
+        headers: {"Accept": "aplication/json"});
+    Map<String, dynamic> map = json.decode(response.body);
+    int luckyNumber = map["luckyNumber"];
+    String luck = map["luck"];
+    print(luckyNumber);
+    print(luck);
+    var obj = {luck, luckyNumber};
+    return obj;
   }
 }
