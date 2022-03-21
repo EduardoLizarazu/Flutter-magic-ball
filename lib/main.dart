@@ -56,6 +56,21 @@ class _inicioState extends State<inicio> {
       margin: const EdgeInsets.only(top: 50, bottom: 50),
       child: Image.asset("assets/bola-magica.png"),
     );
+    final buttonText = Text(
+      'Call Web Service',
+      style: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.normal,
+          color: Colors.white,
+          shadows: [
+            const Shadow(
+                offset: Offset(3, 3), color: Colors.black38, blurRadius: 8),
+            Shadow(
+                offset: const Offset(-3, -3),
+                color: Colors.white.withOpacity(0.85),
+                blurRadius: 8)
+          ]),
+    );
     return Scaffold(
         appBar: AppBar(
           title: Text('LizarazuApp'),
@@ -66,17 +81,21 @@ class _inicioState extends State<inicio> {
             ListView(children: <Widget>[
               title2,
               image,
-              ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black87),
-                    shadowColor: MaterialStateProperty.all(Colors.white),
-                    elevation: MaterialStateProperty.all(3),
-                    fixedSize:
-                        MaterialStateProperty.all(const Size(40.0, 50.0)),
-                  ),
-                  onPressed: getData,
-                  child: new Text('Call Web Service')),
+              Container(
+                alignment: Alignment.center,
+                color: Colors.transparent,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(350, 50),
+                      primary: Colors.grey[900],
+                      shadowColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.transparent)),
+                    ),
+                    onPressed: getData,
+                    child: buttonText),
+              ),
               TextFormField(
                 controller: luckyNumberController,
                 readOnly: true,
