@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'neumorphism_light.dart';
+import 'neumorphism_dark.dart';
 import 'gradient_back.dart';
 
 void main() => runApp(MiApp());
@@ -47,14 +48,8 @@ class _inicioState extends State<inicio> {
   @override
   Widget build(BuildContext context) {
     // TITLE AND IMAGE
-    final title = Container(
-      child: const Text(
-        "Bola Magica de Teodosio",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
-      ),
-    );
+    final title = NeumorphismLight('Bola Magica de Teodosio', 50, 300);
+    final title2 = NeumorphismDark('Bola Magica de Teodosio', 50, 300);
     final image = Container(
       height: 300,
       width: 200,
@@ -69,21 +64,29 @@ class _inicioState extends State<inicio> {
           children: <Widget>[
             GradientBack(),
             ListView(children: <Widget>[
-              title,
+              title2,
               image,
               ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black87),
+                    shadowColor: MaterialStateProperty.all(Colors.white),
+                    elevation: MaterialStateProperty.all(3),
+                    fixedSize:
+                        MaterialStateProperty.all(const Size(40.0, 50.0)),
+                  ),
                   onPressed: getData,
-                  child: new Text('Llamando a servicio web')),
+                  child: new Text('Call Web Service')),
               TextFormField(
                 controller: luckyNumberController,
                 readOnly: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "LuckyNumber: ", border: InputBorder.none),
               ),
               TextFormField(
                 controller: luckController,
                 readOnly: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "Luck: ", border: InputBorder.none),
               ),
             ]),
