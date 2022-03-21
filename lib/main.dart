@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'basic.dart';
+import 'gradient_back.dart';
 
 void main() => runApp(MiApp());
 
@@ -46,6 +46,7 @@ class _inicioState extends State<inicio> {
 
   @override
   Widget build(BuildContext context) {
+    // TITLE AND IMAGE
     final title = Container(
       child: const Text(
         "Bola Magica de Teodosio",
@@ -61,27 +62,32 @@ class _inicioState extends State<inicio> {
       child: Image.asset("assets/bola-magica.png"),
     );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('LizarazuApp'),
-      ),
-      body: ListView(children: <Widget>[
-        title,
-        image,
-        ElevatedButton(
-            onPressed: getData, child: new Text('Llamando a servicio web')),
-        TextFormField(
-          controller: luckyNumberController,
-          readOnly: true,
-          decoration: InputDecoration(
-              hintText: "LuckyNumber: ", border: InputBorder.none),
+        appBar: AppBar(
+          title: Text('LizarazuApp'),
         ),
-        TextFormField(
-          controller: luckController,
-          readOnly: true,
-          decoration:
-              InputDecoration(hintText: "Luck: ", border: InputBorder.none),
-        ),
-      ]),
-    );
+        body: Stack(
+          children: <Widget>[
+            GradientBack(),
+            ListView(children: <Widget>[
+              title,
+              image,
+              ElevatedButton(
+                  onPressed: getData,
+                  child: new Text('Llamando a servicio web')),
+              TextFormField(
+                controller: luckyNumberController,
+                readOnly: true,
+                decoration: InputDecoration(
+                    hintText: "LuckyNumber: ", border: InputBorder.none),
+              ),
+              TextFormField(
+                controller: luckController,
+                readOnly: true,
+                decoration: InputDecoration(
+                    hintText: "Luck: ", border: InputBorder.none),
+              ),
+            ]),
+          ],
+        ));
   }
 }
