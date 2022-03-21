@@ -34,15 +34,18 @@ class _inicioState extends State<inicio> {
     var response = await http.get(
         Uri.parse("https://apisuerte20220316210656.azurewebsites.net/fortunes"),
         headers: {"Accept": "aplication/json"});
-    Map<String, dynamic> map = json.decode(response.body);
-    int luckyNumber = map["luckyNumber"];
-    String luck = map["luck"];
-    print(luckyNumber);
-    print(luck);
-    luckyNumberController.text = 'Lucky Number: ' + luckyNumber.toString();
-    luckController.text = 'Luck: ' + luck.toString();
-    var obj = {luck, luckyNumber};
-    return 'okey';
+    if (response.statusCode == 200) {
+      Map<String, dynamic> map = json.decode(response.body);
+      int luckyNumber = map["luckyNumber"];
+      String luck = map["luck"];
+      print(luckyNumber);
+      print(luck);
+      luckyNumberController.text = 'Lucky Number: ' + luckyNumber.toString();
+      luckController.text = 'Luck: ' + luck.toString();
+      var obj = {luck, luckyNumber};
+      return 'okey';
+    }
+    throw Exception('Failed to load the api');
   }
 
   @override
