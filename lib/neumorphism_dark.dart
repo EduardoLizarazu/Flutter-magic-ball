@@ -35,20 +35,21 @@ class NeumorphismDark extends StatelessWidget {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white70,
-                shadows: [
-                  const Shadow(
-                      offset: Offset(3, 3),
-                      color: Colors.black38,
-                      blurRadius: 10),
-                  Shadow(
-                      offset: const Offset(-3, -3),
-                      color: Colors.white.withOpacity(0.85),
-                      blurRadius: 10)
-                ]),
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white70,
+              // shadows: [
+              //   const Shadow(
+              //       offset: Offset(3, 3),
+              //       color: Colors.black38,
+              //       blurRadius: 10),
+              //   Shadow(
+              //       offset: const Offset(-3, -3),
+              //       color: Colors.white.withOpacity(0.85),
+              //       blurRadius: 10)
+              // ]
+            ),
           ),
         ],
       ),

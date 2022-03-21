@@ -56,20 +56,21 @@ class _inicioState extends State<inicio> {
       margin: const EdgeInsets.only(top: 50, bottom: 50),
       child: Image.asset("assets/bola-magica.png"),
     );
-    final buttonText = Text(
+    const buttonText = Text(
       'Call Web Service',
       style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.normal,
-          color: Colors.white,
-          shadows: [
-            const Shadow(
-                offset: Offset(3, 3), color: Colors.black38, blurRadius: 8),
-            Shadow(
-                offset: const Offset(-3, -3),
-                color: Colors.white.withOpacity(0.85),
-                blurRadius: 8)
-          ]),
+        fontSize: 16.0,
+        fontWeight: FontWeight.normal,
+        color: Colors.white,
+        // shadows: [
+        //   const Shadow(
+        //       offset: Offset(3, 3), color: Colors.black38, blurRadius: 8),
+        //   Shadow(
+        //       offset: const Offset(-3, -3),
+        //       color: Colors.white.withOpacity(0.85),
+        //       blurRadius: 8)
+        // ]
+      ),
     );
     return Scaffold(
         appBar: AppBar(
@@ -82,7 +83,7 @@ class _inicioState extends State<inicio> {
               title2,
               image,
               Container(
-                margin: EdgeInsets.only(bottom: 50),
+                margin: const EdgeInsets.only(bottom: 50),
                 alignment: Alignment.center,
                 color: Colors.transparent,
                 child: ElevatedButton(
@@ -92,7 +93,7 @@ class _inicioState extends State<inicio> {
                       shadowColor: Colors.white60,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.transparent)),
+                          side: const BorderSide(color: Colors.transparent)),
                     ),
                     onPressed: getData,
                     child: buttonText),
