@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'neumorphism_light.dart';
 import 'neumorphism_dark.dart';
 import 'gradient_back.dart';
 
@@ -28,21 +27,29 @@ class inicio extends StatefulWidget {
 }
 
 class _inicioState extends State<inicio> {
-  TextEditingController luckyNumberController = TextEditingController();
-  TextEditingController luckController = TextEditingController();
+  TextEditingController firstDate = TextEditingController();
+  TextEditingController firstText = TextEditingController();
+  TextEditingController lastDate = TextEditingController();
+  TextEditingController lastText = TextEditingController();
   Future<String> getData() async {
     var response = await http.get(
-        Uri.parse("https://apisuerte20220316210656.azurewebsites.net/fortunes"),
+        Uri.parse("https://date.nager.at/api/v3/PublicHolidays/2022/BO"),
         headers: {"Accept": "aplication/json"});
     if (response.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(response.body);
-      int luckyNumber = map["luckyNumber"];
-      String luck = map["luck"];
-      print(luckyNumber);
-      print(luck);
-      luckyNumberController.text = 'Lucky Number: ' + luckyNumber.toString();
-      luckController.text = 'Luck: ' + luck.toString();
-      var obj = {luck, luckyNumber};
+      Map<String, dynamic> map1 = json.decode(response.body)[0];
+      Map<String, dynamic> map2 = json.decode(response.body).last;
+      String firstDateHoliday = map1["date"];
+      String firstTextHoliday = map1["localName"];
+      String lastDateHoliday = map2["date"];
+      String lastTextHoliday = map2["localName"];
+      print(firstDateHoliday);
+      print(firstTextHoliday);
+      print(lastDateHoliday);
+      print(lastTextHoliday);
+      firstDate.text = 'Primer Feriado Date: ' + firstDateHoliday.toString();
+      firstText.text = 'Primer Feriado Name: ' + firstTextHoliday.toString();
+      lastDate.text = 'Ultimo Feriado Date: ' + lastDateHoliday.toString();
+      lastText.text = 'Ultimo Feriado Name: ' + lastTextHoliday.toString();
       return 'okey';
     }
     throw Exception('Failed to load the api');
@@ -51,28 +58,19 @@ class _inicioState extends State<inicio> {
   @override
   Widget build(BuildContext context) {
     // TITLE AND IMAGE
-    final title = NeumorphismLight('Bola Magica de Teodosio', 50, 300);
-    final title2 = NeumorphismDark('Bola Magica de Teodosio', 50, 300);
+    final title2 = NeumorphismDark('Eduardo Lizarazu', 50, 300);
     final image = Container(
       height: 300,
       width: 200,
       margin: const EdgeInsets.only(top: 50, bottom: 50),
-      child: Image.asset("assets/bola-magica.png"),
+      child: Image.asset("assets/EduardoLizarazu.jpg"),
     );
     const buttonText = Text(
-      'Call Web Service',
+      'Feriados 2022',
       style: TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.normal,
         color: Colors.white,
-        // shadows: [
-        //   const Shadow(
-        //       offset: Offset(3, 3), color: Colors.black38, blurRadius: 8),
-        //   Shadow(
-        //       offset: const Offset(-3, -3),
-        //       color: Colors.white.withOpacity(0.85),
-        //       blurRadius: 8)
-        // ]
       ),
     );
     return Scaffold(
@@ -105,7 +103,7 @@ class _inicioState extends State<inicio> {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    height: 200,
+                    height: 300,
                     width: 350,
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
@@ -129,18 +127,34 @@ class _inicioState extends State<inicio> {
                           height: 15,
                         ),
                         TextFormField(
-                          controller: luckyNumberController,
+                          controller: firstDate,
                           readOnly: true,
                           decoration: const InputDecoration(
-                              hintText: "LuckyNumber: ",
+                              hintText: "First Date: ",
                               border: InputBorder.none),
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          controller: luckController,
+                          controller: firstText,
                           readOnly: true,
                           decoration: const InputDecoration(
-                              hintText: "Luck: ", border: InputBorder.none),
+                              hintText: "Fist text: ",
+                              border: InputBorder.none),
+                        ),
+                        TextFormField(
+                          controller: lastDate,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                              hintText: "Last Date: ",
+                              border: InputBorder.none),
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          controller: lastText,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                              hintText: "Last text: ",
+                              border: InputBorder.none),
                         ),
                       ],
                     ),
