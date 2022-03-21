@@ -82,13 +82,14 @@ class _inicioState extends State<inicio> {
               title2,
               image,
               Container(
+                margin: EdgeInsets.only(bottom: 50),
                 alignment: Alignment.center,
                 color: Colors.transparent,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(350, 50),
                       primary: Colors.grey[900],
-                      shadowColor: Colors.black,
+                      shadowColor: Colors.white60,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                           side: BorderSide(color: Colors.transparent)),
@@ -96,18 +97,52 @@ class _inicioState extends State<inicio> {
                     onPressed: getData,
                     child: buttonText),
               ),
-              TextFormField(
-                controller: luckyNumberController,
-                readOnly: true,
-                decoration: const InputDecoration(
-                    hintText: "LuckyNumber: ", border: InputBorder.none),
-              ),
-              TextFormField(
-                controller: luckController,
-                readOnly: true,
-                decoration: const InputDecoration(
-                    hintText: "Luck: ", border: InputBorder.none),
-              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 200,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
+                        const BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(4, 4),
+                          blurRadius: 15,
+                        ),
+                        BoxShadow(
+                            color: Colors.grey.shade600,
+                            offset: const Offset(-4, -4),
+                            blurRadius: 15),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          controller: luckyNumberController,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                              hintText: "LuckyNumber: ",
+                              border: InputBorder.none),
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          controller: luckController,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                              hintText: "Luck: ", border: InputBorder.none),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              )
             ]),
           ],
         ));
