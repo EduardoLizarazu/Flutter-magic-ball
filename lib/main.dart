@@ -26,32 +26,29 @@ class inicio extends StatefulWidget {
 }
 
 class _inicioState extends State<inicio> {
-  TextEditingController firstDate = TextEditingController();
-  TextEditingController firstText = TextEditingController();
-  TextEditingController lastDate = TextEditingController();
-  TextEditingController lastText = TextEditingController();
+  TextEditingController primera_fecha = TextEditingController();
+  TextEditingController primer_texto = TextEditingController();
+  TextEditingController ultimo_fecha = TextEditingController();
+  TextEditingController ultimo_texto = TextEditingController();
   Future<String> getData() async {
     var response = await http.get(
         Uri.parse("https://date.nager.at/api/v3/PublicHolidays/2022/BO"),
         headers: {"Accept": "aplication/json"});
-    if (response.statusCode == 200) {
-      Map<String, dynamic> map1 = json.decode(response.body)[0];
-      Map<String, dynamic> map2 = json.decode(response.body).last;
-      String firstDateHoliday = map1["date"];
-      String firstTextHoliday = map1["localName"];
-      String lastDateHoliday = map2["date"];
-      String lastTextHoliday = map2["localName"];
-      print(firstDateHoliday);
-      print(firstTextHoliday);
-      print(lastDateHoliday);
-      print(lastTextHoliday);
-      firstDate.text = 'Primer Feriado Date: ' + firstDateHoliday.toString();
-      firstText.text = 'Primer Feriado Name: ' + firstTextHoliday.toString();
-      lastDate.text = 'Ultimo Feriado Date: ' + lastDateHoliday.toString();
-      lastText.text = 'Ultimo Feriado Name: ' + lastTextHoliday.toString();
-      return 'okey';
-    }
-    throw Exception('Failed to load the api');
+    Map<String, dynamic> map1 = json.decode(response.body)[0];
+    Map<String, dynamic> map2 = json.decode(response.body).last;
+    String primera_fecha_fer = map1["date"];
+    String primer_texto_fer = map1["localName"];
+    String ultimo_fecha_fer = map2["date"];
+    String ultimo_texto_fer = map2["localName"];
+    print(primera_fecha_fer);
+    print(primer_texto_fer);
+    print(ultimo_fecha_fer);
+    print(ultimo_texto_fer);
+    primera_fecha.text = 'Primero: ' + primer_texto_fer.toString();
+    primer_texto.text = 'Primero: ' + primer_texto_fer.toString();
+    ultimo_fecha.text = 'Ultimo: ' + ultimo_fecha_fer.toString();
+    ultimo_fecha.text = 'Ultimo ' + ultimo_texto_fer.toString();
+    return 'okey';
   }
 
   @override
@@ -146,7 +143,7 @@ class _inicioState extends State<inicio> {
                           height: 15,
                         ),
                         TextFormField(
-                          controller: firstDate,
+                          controller: primera_fecha,
                           readOnly: true,
                           decoration: const InputDecoration(
                               hintText: "First Date: ",
@@ -154,14 +151,14 @@ class _inicioState extends State<inicio> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          controller: firstText,
+                          controller: primer_texto,
                           readOnly: true,
                           decoration: const InputDecoration(
                               hintText: "Fist text: ",
                               border: InputBorder.none),
                         ),
                         TextFormField(
-                          controller: lastDate,
+                          controller: ultimo_fecha,
                           readOnly: true,
                           decoration: const InputDecoration(
                               hintText: "Last Date: ",
@@ -169,7 +166,7 @@ class _inicioState extends State<inicio> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          controller: lastText,
+                          controller: ultimo_fecha,
                           readOnly: true,
                           decoration: const InputDecoration(
                               hintText: "Last text: ",
