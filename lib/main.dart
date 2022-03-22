@@ -64,8 +64,8 @@ class _inicioState extends State<inicio> {
       margin: const EdgeInsets.only(top: 50, bottom: 50),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.cover,
+        image: const DecorationImage(
+          fit: BoxFit.contain,
           image: NetworkImage(
               'https://4.bp.blogspot.com/-5OH-tlHlBi8/Vmy1nQqB55I/AAAAAAAA2rc/sDkk84-6unY/s1600/Eduardo%2BLizarazu%2Bse%2Bqued%25C3%25B3%2Bayer%2Bcon%2Bla%2Bmedalla%2Bde%2Bplata%2Ben%2Bla%2Bdisciplina%2Bde%2Btenis%2Bde%2Bmesa.jpg'),
         ),
