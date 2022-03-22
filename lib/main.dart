@@ -3,7 +3,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'neumorphism_dark.dart';
-import 'gradient_back.dart';
 
 void main() => runApp(MiApp());
 
@@ -63,7 +62,25 @@ class _inicioState extends State<inicio> {
       height: 300,
       width: 200,
       margin: const EdgeInsets.only(top: 50, bottom: 50),
-      child: Image.asset("assets/EduardoLizarazu.jpg"),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(
+              'https://4.bp.blogspot.com/-5OH-tlHlBi8/Vmy1nQqB55I/AAAAAAAA2rc/sDkk84-6unY/s1600/Eduardo%2BLizarazu%2Bse%2Bqued%25C3%25B3%2Bayer%2Bcon%2Bla%2Bmedalla%2Bde%2Bplata%2Ben%2Bla%2Bdisciplina%2Bde%2Btenis%2Bde%2Bmesa.jpg'),
+        ),
+        boxShadow: [
+          const BoxShadow(
+            color: Colors.black,
+            offset: Offset(4, 4),
+            blurRadius: 15,
+          ),
+          BoxShadow(
+              color: Colors.grey.shade800,
+              offset: const Offset(-4, -4),
+              blurRadius: 15),
+        ],
+      ),
     );
     const buttonText = Text(
       'Feriados 2022',
@@ -79,7 +96,9 @@ class _inicioState extends State<inicio> {
         ),
         body: Stack(
           children: <Widget>[
-            GradientBack(),
+            Container(
+                decoration:
+                    const BoxDecoration(color: Color.fromRGBO(33, 33, 33, 1))),
             ListView(children: <Widget>[
               title2,
               image,
